@@ -1411,19 +1411,6 @@ defmodule PinchflatWeb.Sources.SourceHTML do
     })
   end
 
-  attr :source, :any, required: true
-
-  def retention_summary(assigns) do
-    ~H"""
-    <p
-      class="mt-1 max-w-xs whitespace-normal text-xs text-theme-on-surface-muted"
-      title="Age is counted from download time. Publication-date cutoff cleanup still applies; protected media is excluded."
-    >
-      Retention: {retention_policy_label(@source)}
-    </p>
-    """
-  end
-
   defp retention_days_label(days, origin) when days in [nil, 0],
     do: "No age-based cleanup (#{origin})"
 

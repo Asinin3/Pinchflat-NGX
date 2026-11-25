@@ -462,10 +462,24 @@
                     <span class="block text-pretty break-words font-medium text-theme-on-surface">{source.custom_name}</span>
                   </.subtle_link>
 
-                  <div class="mt-1">
+                  <div class="mt-1 flex flex-wrap items-center gap-2">
                     <.source_profile_picker source={source} media_profiles={@media_profiles} />
+                    <.source_index_frequency
+                      source={source}
+                      id={"source-indexing-mobile-#{source.id}"}
+                      show_icon
+                      class="text-xs text-theme-on-surface-muted"
+                    />
+                    <.source_retention
+                      source={source}
+                      id={"source-retention-mobile-#{source.id}"}
+                      timezone={@timezone}
+                      confirm={confirm_for(@cutoff_confirm, source)}
+                      saved={saved_for(@settings_saved, source)}
+                      show_icon
+                      class="text-xs text-theme-on-surface-muted"
+                    />
                   </div>
-                  <SourceHTML.retention_summary source={source} />
                 </div>
               </div>
             </div>
@@ -567,7 +581,12 @@
             />
           </:col>
 
-          <:col :let={source} label="Name" sort_key="custom_name" class="w-full min-w-40 whitespace-normal align-middle">
+          <:col
+            :let={source}
+            label="Name"
+            sort_key="custom_name"
+            class="w-full min-w-40 whitespace-normal align-middle @max-3xl:min-w-28"
+          >
             <div data-source-id={source.id} class="min-w-0 leading-6 text-pretty break-words whitespace-normal">
               <.subtle_link href={~p"/sources/#{source.id}"}>{source.custom_name}</.subtle_link>
             </div>
@@ -613,12 +632,23 @@
             </.subtle_link>
           </:col>
 
-          <:col :let={source} label="Size" sort_key="media_size_bytes" class="whitespace-nowrap">
+          <:col
+            :let={source}
+            label="Size"
+            sort_key="media_size_bytes"
+            class="whitespace-nowrap"
+            column_class="@max-3xl:hidden"
+          >
             <.readable_filesize byte_size={source.media_size_bytes} />
           </:col>
 
           <:col :let={source} label="Media Profile" sort_key="media_profile_name" class="max-w-64 align-middle">
-            <.source_profile_picker source={source} media_profiles={@media_profiles} text_class="max-w-38 truncate" />
+            <.source_profile_picker
+              source={source}
+              media_profiles={@media_profiles}
+              text_class="max-w-38 truncate @max-3xl:max-w-24"
+              chevron_class="@max-3xl:hidden!"
+            />
           </:col>
 
           <:col
@@ -628,7 +658,12 @@
             sort_key="index_frequency"
             class="text-center"
           >
-            <.source_index_frequency source={source} id={"source-indexing-#{source.id}"} class="mx-auto" />
+            <.source_index_frequency
+              source={source}
+              id={"source-indexing-#{source.id}"}
+              class="mx-auto"
+              chevron_class="@max-3xl:hidden!"
+            />
           </:col>
 
           <:col
@@ -645,6 +680,7 @@
               confirm={confirm_for(@cutoff_confirm, source)}
               saved={saved_for(@settings_saved, source)}
               class="mx-auto"
+              chevron_class="@max-3xl:hidden!"
             />
           </:col>
 
@@ -797,11 +833,11 @@
                   </div>
                 </div>
 
-                <div class="flex items-center justify-between gap-2">
-                  <div class="pointer-events-auto min-w-0">
+                <div class="flex flex-wrap items-center justify-between gap-2">
+                  <div class="pointer-events-auto min-w-0 max-w-full">
                     <.source_profile_picker source={source} media_profiles={@media_profiles} />
                   </div>
-                  <div class="pointer-events-auto flex shrink-0 items-center gap-3">
+                  <div class="pointer-events-auto flex shrink-0 items-center gap-2">
                     <.source_index_frequency
                       source={source}
                       id={"source-indexing-grid-#{source.id}"}
