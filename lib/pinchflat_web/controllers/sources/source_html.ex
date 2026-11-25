@@ -114,12 +114,16 @@ defmodule PinchflatWeb.Sources.SourceHTML do
   """
   attr :collection_type, :atom, required: true
   attr :class, :string, default: nil
+  attr :label_class, :string, default: nil, doc: "classes for the label, such as hiding it visually when narrow"
 
   def collection_type_badge(assigns) do
     ~H"""
-    <span class={["inline-flex items-center gap-1.5 whitespace-nowrap", @class]}>
+    <span
+      class={["inline-flex items-center gap-1.5 whitespace-nowrap", @class]}
+      title={collection_type_label(@collection_type) || "Unknown"}
+    >
       <.icon name={collection_type_icon(@collection_type)} class="h-4 w-4 shrink-0 text-theme-on-surface-muted" />
-      {collection_type_label(@collection_type) || "Unknown"}
+      <span class={@label_class}>{collection_type_label(@collection_type) || "Unknown"}</span>
     </span>
     """
   end
