@@ -11,6 +11,7 @@ defmodule PinchflatWeb.CustomComponents.TabComponents do
   slot :tab, required: true do
     attr :id, :string, required: true
     attr :title, :string, required: true
+    attr :short_title, :string, doc: "a shorter title shown instead below the sm breakpoint"
   end
 
   slot :tab_append, required: false
@@ -84,7 +85,8 @@ defmodule PinchflatWeb.CustomComponents.TabComponents do
               )
             ]}
           >
-            <span>{tab.title}</span>
+            <span :if={tab[:short_title]} class="sm:hidden">{tab.short_title}</span>
+            <span class={tab[:short_title] && "max-sm:hidden"}>{tab.title}</span>
           </.link>
         </nav>
 

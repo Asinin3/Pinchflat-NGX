@@ -1,5 +1,10 @@
 <.tabbed_layout active_tab={to_string(@source_type)} tab_href={fn type -> source_tab_path(type, @view_mode) end}>
-  <:tab :for={{type, title} <- source_tabs()} id={type} title={title}>
+  <:tab
+    :for={{type, title} <- source_tabs()}
+    id={type}
+    title={title}
+    short_title={if type == "videos", do: "Videos"}
+  >
     <div>
       <div
         :if={@tab_record_count > 0 or @search_term != nil}

@@ -836,6 +836,7 @@ defmodule PinchflatWeb.Sources.SourceLive.IndexTableLiveTest do
 
       assert has_element?(view, ~s(header nav a[aria-current="page"]), "Channels & Playlists")
       assert has_element?(view, "header nav a", "Individual Videos")
+      assert has_element?(view, "header nav a span.sm\\:hidden", "Videos")
       assert has_element?(view, ~s([data-view-toggle="grid"]), "Poster Grid")
       assert has_element?(view, ~s(header [role="group"][aria-label="Source view"] [data-view-toggle="grid"]))
       refute html =~ "Choose a table or poster library layout."
